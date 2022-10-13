@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.PubSystemCodeMapper">
+
+    <select id="selectValueByCodeType" resultType="com.example.demo.bean.PubSystemCode" parameterType="java.lang.String">
+        select
+        CODE_TYPE codeType,
+        CODE_ID codeId,
+        CODE_NAME codeName,
+        SEQ seq,
+        REMARK remark,
+        `LEVEL` level,
+        repair_definition repairDefinition
+        from pub_system_code
+        where
+        CODE_TYPE = #{codeType,jdbcType=VARCHAR} and CODE_ID = #{codeId,jdbcType=VARCHAR}
+    </select>
+
+</mapper>
