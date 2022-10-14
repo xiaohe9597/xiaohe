@@ -1,0 +1,6 @@
+1.元注解 (5种)
+@Retention
+@Documented
+@Target
+@Inherited 继承性
+@Repeatable 可重复 java8后才被引入

@@ -1,5 +1,6 @@
 package com.example.demo.exception;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -9,15 +10,17 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  * @description
  */
 @ControllerAdvice
+@Slf4j
 public class GlobalHandler {
 
     @ExceptionHandler(Exception.class)
-    public void globalExceptionHandler(Exception e){
+    public void globalExceptionHandler(Exception e) {
+        log.info("全局异常捕获" + e);
         System.out.println("全局异常捕获！");
     }
 
     @ExceptionHandler(ArithmeticException.class)
-    public void arithmeticExceptionHandler(ArithmeticException e){
+    public void arithmeticExceptionHandler(ArithmeticException e) {
         System.out.println("除零异常捕获！");
     }
 
