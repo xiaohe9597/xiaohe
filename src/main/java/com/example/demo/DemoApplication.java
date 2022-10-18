@@ -8,7 +8,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 
-@EnableCaching
+@EnableCaching //开启基于注解的缓存
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.example.demo.*"})
 //@PropertySource({"classpath:application.properties"})

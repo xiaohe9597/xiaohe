@@ -93,7 +93,7 @@ public class SqlExecuteTimeCountInterceptor implements Interceptor {
             // 格式化Sql语句，去除换行符，替换参数
             sql = formatSql(sql, parameterObject, parameterMappingList);
             logger.info("执行SQL：[ " + sql + " ] 执行时间：[" + sqlCost + "ms]|统计:SQL统计|" + (execFlag ? "成功" : "失败") + "|"
-                    //+ TimeScale.getString(sec)
+                    + TimeScale.getString(sec)
             );
             // logger.info("执行SQL的参数：[ " +messageParameters(parameterMappingList));
         }
@@ -279,12 +279,12 @@ public class SqlExecuteTimeCountInterceptor implements Interceptor {
                     if (parameterMapping.getJavaType().isAssignableFrom(String.class)) {
                         propertyValue = "\"" + map.get(propertyName) + "\"";
                     }
-                    message += (propertyName + "=" + map.get(propertyName) + ";");
+                    message += (propertyName + "=" + propertyValue + ";");
                 }
                 sql = sql.replaceFirst("\\?", propertyValue);
             }
         } catch (Exception e) {
-            logger.info("e" + e);
+                logger.info("sql 解析出错：" + e);
         } finally {
             logger.info("sql:" + sql + "|参数:" + message);
         }
