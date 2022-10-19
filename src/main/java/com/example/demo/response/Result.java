@@ -19,6 +19,8 @@ public class Result<T> {
 
     private Long time;
 
+    private Object data;
+
     public Result(int code, String msg, List<T> list) {
         this.code = code;
         this.msg = msg;
@@ -26,8 +28,20 @@ public class Result<T> {
         this.time = System.currentTimeMillis();
     }
 
+    public Result(int code, String msg, Object data) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+        this.time = System.currentTimeMillis();
+    }
+
     public static Result BuildResponseResult(int code, String msg, List list){
         Result result = new Result(code, msg, list);
+        return result;
+    }
+
+    public static Result BuildResponseResult(int code, String msg, Object data){
+        Result result = new Result(code, msg, data);
         return result;
     }
 
@@ -61,5 +75,13 @@ public class Result<T> {
 
     public void setTime(Long time) {
         this.time = time;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
     }
 }
