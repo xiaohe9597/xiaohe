@@ -27,4 +27,5 @@ public class PubSystemCode {
     private Integer level;
 
     private String repairDefinition;
+
 }

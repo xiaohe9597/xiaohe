@@ -7,4 +7,6 @@ public interface PubSystemCodeService {
 
     @Cacheable(value = "CodeLibrary", key = "#p0+#p1")
     PubSystemCode selectValueByCodeType(String codeType, String codeId);
+
+    void addPubSystemCode(PubSystemCode pubSystemCode);
 }

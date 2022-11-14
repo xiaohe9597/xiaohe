@@ -7,4 +7,6 @@ import org.springframework.stereotype.Component;
 public interface PubSystemCodeMapper {
 
     PubSystemCode selectValueByCodeType(String codeType, String codeId);
+
+    void add(PubSystemCode pubSystemCode);
 }

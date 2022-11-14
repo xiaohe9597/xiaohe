@@ -16,4 +16,24 @@
         CODE_TYPE = #{codeType,jdbcType=VARCHAR} and CODE_ID = #{codeId,jdbcType=VARCHAR}
     </select>
 
+    <insert id="add" parameterType="com.example.demo.bean.PubSystemCode">
+        insert into pub_system_code(
+            CODE_TYPE,
+            CODE_ID,
+            CODE_NAME,
+            SEQ,
+            REMARK,
+            `LEVEL`,
+            repair_definition
+        )values(
+            #{codeType, jdbcType=VARCHAR},
+            #{codeId, jdbcType=VARCHAR},
+            #{codeName, jdbcType=VARCHAR},
+            #{seq, jdbcType=INTEGER},
+            #{remark, jdbcType=VARCHAR},
+            #{level, jdbcType=INTEGER},
+            #{repairDefinition, jdbcType=VARCHAR}
+        )
+    </insert>
+
 </mapper>

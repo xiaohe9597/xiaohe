@@ -28,7 +28,7 @@ import java.time.Duration;
 @EnableCaching //开启基于注解的缓存（也可以放在启动类上)
 @Component
 @PropertySource("classpath:application.properties")
-@ConfigurationProperties(prefix = "spring.redis")
+//@ConfigurationProperties(prefix = "spring.redis")
 public class RedisConfig extends CachingConfigurerSupport {
 
     public static final Logger logger = LoggerFactory.getLogger(RedisConfig.class);
@@ -58,7 +58,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Bean
     public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofSeconds(60000000)) // 60s缓存失效
+                .entryTtl(Duration.ofSeconds(15)) // 单位秒
                 // 设置key的序列化方式
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(keySerializer()))
                 // 设置value的序列化方式

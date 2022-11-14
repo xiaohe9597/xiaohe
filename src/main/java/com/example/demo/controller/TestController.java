@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.bean.PubSystemCode;
 import com.example.demo.eunm.ResultEnum;
 import com.example.demo.init.ForkJoinConfig;
 import com.example.demo.response.Result;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,7 +45,7 @@ public class TestController {
     private StringRedisTemplate stringRedisTemplate;
 
     @ApiOperation(value = "测试fork线程池", notes = "测试fork线程池")
-    @RequestMapping(value = "/testForkJoin", method = RequestMethod.GET)
+    @RequestMapping(value = "/forkJoin", method = RequestMethod.GET)
     public void testForkJoin() {
         long start1 = System.currentTimeMillis();
 //        for (int i=0; i<=10000; i++) {
@@ -77,5 +79,11 @@ public class TestController {
     public Result jedisGetValue(String key) {
         String value = (String) redisService.get(key);
         return Result.BuildResponseResult(ResultEnum.SUCESS.getCode(), ResultEnum.SUCESS.getMsg(), value);
+    }
+
+    @ApiOperation(value = "测试事务传播行为", notes = "测试事务传播行为")
+    @RequestMapping(value="/transactionPropagation", method = RequestMethod.POST)
+    public void transactionPropagationTest(@RequestBody PubSystemCode pubSystemCode){
+         pubSystemCodeService.addPubSystemCode(pubSystemCode);
     }
 }
