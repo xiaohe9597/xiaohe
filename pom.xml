@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <curator.version>2.12.0</curator.version>
     </properties>
 
     <dependencies>
@@ -118,6 +119,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <!-- curator framwork  zookeeper分布式锁-->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>${curator.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>${curator.version}</version>
         </dependency>
 
     </dependencies>

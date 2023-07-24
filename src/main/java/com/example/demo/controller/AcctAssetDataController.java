@@ -5,6 +5,7 @@ import com.example.demo.bean.AcctAssetData;
 import com.example.demo.eunm.ResultEnum;
 import com.example.demo.mapper.AcctAssetDataMapper;
 import com.example.demo.response.Result;
+import com.example.demo.service.AcctAssetDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,12 +23,12 @@ import java.util.List;
 public class AcctAssetDataController {
 
     @Autowired
-    private AcctAssetDataMapper acctAssetDataMapper;
+    private AcctAssetDataService acctAssetDataService;
 
     @DataDictionary
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public Result list() {
-        List<AcctAssetData> acctAssetDataList = acctAssetDataMapper.list();
+        List<AcctAssetData> acctAssetDataList = acctAssetDataService.list();
         return Result.BuildResponseResult(ResultEnum.SUCESS.getCode(), ResultEnum.SUCESS.getMsg(), acctAssetDataList);
     }
 }
