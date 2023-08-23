@@ -1,6 +1,8 @@
 package com.example.demo;
 
+import lombok.libs.com.zwitserloot.cmdreader.Excludes;
 import org.mybatis.spring.annotation.MapperScan;
+import org.redisson.spring.starter.RedissonAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -14,7 +16,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.client.RestTemplate;
 
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {RedissonAutoConfiguration.class})
 @ComponentScan(basePackages = {"com.example.demo.*"})
 //@PropertySource({"classpath:application.properties"})
 @MapperScan(basePackages = "com.example.demo.mapper")

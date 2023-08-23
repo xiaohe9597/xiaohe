@@ -2,6 +2,7 @@ package com.example.demo.redis;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -28,7 +30,7 @@ import java.time.Duration;
 @EnableCaching //开启基于注解的缓存（也可以放在启动类上)
 @Component
 @PropertySource("classpath:application.properties")
-//@ConfigurationProperties(prefix = "spring.redis")
+@ConfigurationProperties(prefix = "spring.redis")
 public class RedisConfig extends CachingConfigurerSupport {
 
     public static final Logger logger = LoggerFactory.getLogger(RedisConfig.class);
@@ -73,6 +75,25 @@ public class RedisConfig extends CachingConfigurerSupport {
 
         logger.info("自定义RedisCacheManager加载完成");
         return redisCacheManager;
+    }
+
+    /**
+     * 引入redissonCient, 必须配置RedisConnectionFactory 或者 @SpringBootApplication(exclude = {RedissonAutoConfiguration.class})
+     * 二者择其一或者两者都有
+     * 否则stringRedisTemplate.opsForValue().setIfAbsent 返回空指针
+     *
+     * link : https://www.cnblogs.com/hli-tech/p/14989585.html
+     * @return
+     */
+    @Bean
+    public RedisConnectionFactory redisConnectionFactory(){
+        LettuceConnectionFactory lettuceConnectionFactory = new LettuceConnectionFactory();
+        lettuceConnectionFactory.setDatabase(database);
+        lettuceConnectionFactory.setHostName(host);
+        lettuceConnectionFactory.setPassword(password);
+        lettuceConnectionFactory.setPort(port);
+        lettuceConnectionFactory.setTimeout(timeout);
+        return lettuceConnectionFactory;
     }
 
     // key键序列化方式

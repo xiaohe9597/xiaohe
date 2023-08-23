@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @createTime 2022/8/31 14:33
  * @description
  */
-@Api(value = "测试块", description = "测试块")
+@Api(value = "异常", description = "异常")
 @RestController
 @RequestMapping(value = "/exception")
 public class DemoController {

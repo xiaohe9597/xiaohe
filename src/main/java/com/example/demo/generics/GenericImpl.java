@@ -8,7 +8,9 @@ package com.example.demo.generics;
  * @description
  */
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -69,12 +71,13 @@ public class GenericImpl<T> implements GenericInterface<T> {
      */
     class GenericTwoImpl implements GenericInterface<String> {
 
-        private String[] fruits = new String[]{"apple", "banana", "pear"};
+        //private String[] fruits = new String[]{"apple", "banana", "pear"};
+        private List<String> fruits = Arrays.asList("apple", "banana", "pear");
 
         @Override
         public String next() {
             Random random = new Random();
-            return fruits[random.nextInt(3)];
+            return fruits.get(random.nextInt(3));
         }
     }
 }
